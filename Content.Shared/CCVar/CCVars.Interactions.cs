@@ -88,12 +88,12 @@ public sealed partial class CCVars
     /// </summary>
     // default colors based on Resources/Prototypes/Shaders/outline.yml
     public static readonly CVarDef<string> ValidInteractionOutlineColor = CVarDef.Create(
-        "interaction.outline.valid_color", "#00FF0055", CVar.CLIENTONLY | CVar.ARCHIVE);
+        "interaction.outline.in_range_color", "#00FF0055", CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// The color of the outline for objects out-of-range of interaction.
     /// </summary>
     // default colors based on Resources/Prototypes/Shaders/outline.yml
     public static readonly CVarDef<string> InvalidInteractionOutlineColor = CVarDef.Create(
-        "interaction.outline.invalid_color", "#FF000055", CVar.CLIENTONLY | CVar.ARCHIVE);
+        "interaction.outline.out_of_range_color", "#FF000055", CVar.CLIENTONLY | CVar.ARCHIVE);
 }
