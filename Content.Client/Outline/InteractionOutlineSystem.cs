@@ -47,6 +47,8 @@ public sealed partial class InteractionOutlineSystem : EntitySystem
 
     private EntityUid? _lastHoveredEntity;
 
+    private ISawmill? _interactionOutlineSawmill;
+
     public override void Shutdown()
     {
         foreach (var shader in _shaderCache.Values)
@@ -65,6 +67,8 @@ public sealed partial class InteractionOutlineSystem : EntitySystem
         Subs.CVar(_configManager, CCVars.OutlineEnabled, SetCvarEnabled);
         SubscribeLocalEvent<InteractionOutlineComponent, ComponentShutdown>(OnShutdown);
         UpdatesAfter.Add(typeof(SharedEyeSystem));
+
+        _interactionOutlineSawmill = LogManager.GetSawmill("interactionoutline");
     }
 
     private void OnShutdown(Entity<InteractionOutlineComponent> ent, ref ComponentShutdown args)
@@ -237,6 +241,11 @@ public sealed partial class InteractionOutlineSystem : EntitySystem
             entry.Shader == shader)
         {
             return;
+        }
+
+        if (OutlineColor.TryGetOutlineColor(inRange, out var outlineColor, _configManager, _interactionOutlineSawmill))
+        {
+            shader.SetParameter("outline_color", outlineColor);
         }
 
         _sprite.SetPostShader(sprite, new SpriteComponent.PostShaderArgs(ContentPostShaderIds.InteractionOutline, shader)

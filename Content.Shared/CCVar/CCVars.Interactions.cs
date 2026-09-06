@@ -83,4 +83,15 @@ public sealed partial class CCVars
     public static readonly CVarDef<bool> ControlHoldToAttackRanged =
         CVarDef.Create("control.hold_to_attack_ranged", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// The color of the outline for objects in-range of interaction.
+    /// </summary>
+    public static readonly CVarDef<string> ValidInteractionOutlineColor = CVarDef.Create(
+        "interaction.outline.valid_color", "#00FF0055", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// The color of the outline for objects out-of-range of interaction.
+    /// </summary>
+    public static readonly CVarDef<string> InvalidInteractionOutlineColor = CVarDef.Create(
+        "interaction.outline.invalid_color", "#FF000055", CVar.CLIENTONLY | CVar.ARCHIVE);
 }

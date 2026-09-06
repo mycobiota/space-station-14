@@ -400,6 +400,10 @@ ui-options-disable-singulo-warp-tooltip = Disables the screen warping effect on 
 
 ui-options-screen-shake-intensity = Screen shake intensity
 
+ui-options-interaction-outline-valid = Outline color for objects inside of interaction range
+ui-options-interaction-outline-invalid = Outline color for objects outside of interaction range
+ui-options-interaction-color-example = This is the outline color.
+
 ui-options-chat-window-opacity = Chat window opacity
 ui-options-speech-bubble-text-opacity = Speech bubble text opacity
 ui-options-speech-bubble-speaker-opacity = Speech bubble speaker opacity

@@ -113,8 +113,8 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
 
         Subs.CVar(_cfgMan, CCVars.DragDropDeadZone, SetDeadZone, true);
 
-        _dropTargetInRangeShader = ProtoMan.Index(ShaderDropTargetInRange).Instance();
-        _dropTargetOutOfRangeShader = ProtoMan.Index(ShaderDropTargetOutOfRange).Instance();
+        _dropTargetInRangeShader = ProtoMan.Index(ShaderDropTargetInRange).InstanceUnique();
+        _dropTargetOutOfRangeShader = ProtoMan.Index(ShaderDropTargetOutOfRange).InstanceUnique();
         // needs to fire on mouseup and mousedown so we can detect a drag / drop
         CommandBinds.Builder
             .BindBefore(EngineKeyFunctions.Use, new PointerInputCmdHandler(OnUse, false, true), new[] { typeof(SharedInteractionSystem) })
@@ -550,6 +550,12 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (OutlineColor.TryGetOutlineColor(true, out var validColor, _cfgMan))
+            _dropTargetInRangeShader?.SetParameter("outline_color", validColor);
+
+        if (OutlineColor.TryGetOutlineColor(false, out var invalidColor, _cfgMan))
+            _dropTargetOutOfRangeShader?.SetParameter("outline_color", invalidColor);
 
         switch (_state)
         {
