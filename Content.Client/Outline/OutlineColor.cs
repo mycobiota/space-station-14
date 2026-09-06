@@ -9,6 +9,7 @@ public static class OutlineColor
     /// Gets the relevant interaction outline color based on the client's outline color CVars.
     /// </summary>
     /// <param name="inRange">Whether the thing we're getting the outline for is in-range or out-of-range.</param>
+    /// <param name="outlineColor">The retrieved color. If the cvar was set to an invalid color, this will default to the cvar's default color setting.</param>
     /// <returns>True if the cvar was set to a valid hex color.</returns>
     public static bool TryGetOutlineColor(bool inRange, out Color outlineColor, IConfigurationManager? configManager = null, ISawmill? sawmill = null)
     {
