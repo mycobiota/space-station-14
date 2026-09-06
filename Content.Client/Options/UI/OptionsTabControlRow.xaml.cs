@@ -544,7 +544,7 @@ public sealed class OptionColorSliderCVar : BaseOptionCVar<string>
         get => _slider.Slider.Color.ToHex();
         set
         {
-            _slider.Slider.Color = Color.FromHex(value);
+            _slider.Slider.Color = Color.FromHex(value, Color.Black);
             UpdateLabelColor();
         }
     }
@@ -574,6 +574,12 @@ public sealed class OptionColorSliderCVar : BaseOptionCVar<string>
         {
             ValueChanged();
             UpdateLabelColor();
+        };
+
+        slider.ResetDefaults.OnPressed += _ =>
+        {
+            Value = cVar.DefaultValue;
+            ValueChanged();
         };
     }
 
