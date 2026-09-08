@@ -48,8 +48,6 @@
                 <ui:OptionColorSlider Name="HighlightsColorSlider"
                     Title="{Loc 'ui-options-highlights-color'}"
                     Example="{Loc 'ui-options-highlights-color-example'}"/>
-                <!-- interaction outline custom settings -->
-                <!-- breaking up with labels to help visually distinguish the options better -->
                 <Label Text="{Loc 'ui-options-interaction-outline-valid'}"
                        StyleClasses="LabelKeyText"/>
                 <ui:OptionColorSlider Name="ValidInteractionOutlineColorSlider"
