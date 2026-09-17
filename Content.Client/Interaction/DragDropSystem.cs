@@ -462,7 +462,7 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
 
             var shader = valid.Value ? _dropTargetInRangeShader! : _dropTargetOutOfRangeShader!;
 
-            if (OutlineColor.TryGetOutlineColor(valid.Value, out var color, _cfgMan, _dragDropSawmill))
+            if (OutlineColor.TryGetCustomOutlineColor(valid.Value, out var color, _cfgMan, _dragDropSawmill) || color != default)
                 shader.SetParameter("outline_color", color);
 
             // highlight depending on whether its in or out of range

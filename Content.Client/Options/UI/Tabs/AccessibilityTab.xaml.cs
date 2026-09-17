@@ -33,9 +33,10 @@ public sealed partial class AccessibilityTab : Control
         Control.AddOptionCheckBox(CCVars.ChatAutoFillHighlights, AutoFillHighlightsCheckBox);
         Control.AddOptionColorSlider(CCVars.ChatHighlightsColor, HighlightsColorSlider);
 
-        Control.AddOptionColorSlider(CCVars.ValidInteractionOutlineColor,
+        Control.AddOptionCheckBox(CCVars.UseCustomInteractionOutlineColors, UseCustomInteractionOutlineColors);
+        Control.AddOptionColorSlider(CCVars.CustomValidInteractionOutlineColor,
             ValidInteractionOutlineColorSlider);
-        Control.AddOptionColorSlider(CCVars.InvalidInteractionOutlineColor,
+        Control.AddOptionColorSlider(CCVars.CustomInvalidInteractionOutlineColor,
             InvalidInteractionOutlineColorSlider);
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
