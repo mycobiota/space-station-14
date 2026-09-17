@@ -183,7 +183,7 @@ public sealed partial class TargetOutlineSystem : EntitySystem
 
             var shader = valid ? _shaderTargetValid! : _shaderTargetInvalid!;
 
-            if (OutlineColor.TryGetOutlineColor(valid, out var color, _cfg, _targetOutlineSawmill))
+            if (OutlineColor.TryGetCustomOutlineColor(valid, out var color, _cfg, _targetOutlineSawmill) || color != default)
                 shader.SetParameter("outline_color", color);
 
             // highlight depending on whether its in or out of range
