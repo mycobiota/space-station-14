@@ -30,7 +30,7 @@ public sealed partial class TargetOutlineSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private IConfigurationManager _cfg = null!;
+    [Dependency] private OutlineColorManager _outlineColorManager = null!;
 
     private bool _enabled = false;
 
@@ -82,16 +82,12 @@ public sealed partial class TargetOutlineSystem : EntitySystem
 
     private readonly HashSet<SpriteComponent> _highlightedSprites = new();
 
-    private ISawmill? _targetOutlineSawmill;
-
     public override void Initialize()
     {
         base.Initialize();
 
         _shaderTargetValid = ProtoMan.Index(ShaderTargetValid).InstanceUnique();
         _shaderTargetInvalid = ProtoMan.Index(ShaderTargetInvalid).InstanceUnique();
-
-        _targetOutlineSawmill = LogManager.GetSawmill("target_outline");
     }
 
     public void Disable()
@@ -183,8 +179,7 @@ public sealed partial class TargetOutlineSystem : EntitySystem
 
             var shader = valid ? _shaderTargetValid! : _shaderTargetInvalid!;
 
-            if (OutlineColor.TryGetCustomOutlineColor(valid, out var color, _cfg, _targetOutlineSawmill) || color != default)
-                shader.SetParameter("outline_color", color);
+            shader.SetParameter("outline_color", _outlineColorManager.GetOutlineColor(valid));
 
             // highlight depending on whether its in or out of range
             _sprite.SetPostShader(sprite, new SpriteComponent.PostShaderArgs(ContentPostShaderIds.TargetOutline, shader)
