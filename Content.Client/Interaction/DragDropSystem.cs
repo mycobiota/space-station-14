@@ -49,7 +49,7 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
-    [Dependency] private OutlineColorManager _outlineColorManager = null!;
+    [Dependency] private InteractionOutlineColorManager _interactionOutlineColorManager = null!;
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -459,7 +459,7 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
 
             var shader = valid.Value ? _dropTargetInRangeShader! : _dropTargetOutOfRangeShader!;
 
-            shader.SetParameter("outline_color", _outlineColorManager.GetOutlineColor(valid.Value));
+            shader.SetParameter("outline_color", _interactionOutlineColorManager.GetOutlineColor(valid.Value));
 
             // highlight depending on whether its in or out of range
             SetDragDropPostShader((entity, inRangeSprite), shader);
