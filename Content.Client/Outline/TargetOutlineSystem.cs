@@ -30,7 +30,7 @@ public sealed partial class TargetOutlineSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private OutlineColorManager _outlineColorManager = null!;
+    [Dependency] private InteractionOutlineColorManager _interactionOutlineColorManager = null!;
 
     private bool _enabled = false;
 
@@ -179,7 +179,7 @@ public sealed partial class TargetOutlineSystem : EntitySystem
 
             var shader = valid ? _shaderTargetValid! : _shaderTargetInvalid!;
 
-            shader.SetParameter("outline_color", _outlineColorManager.GetOutlineColor(valid));
+            shader.SetParameter("outline_color", _interactionOutlineColorManager.GetOutlineColor(valid));
 
             // highlight depending on whether its in or out of range
             _sprite.SetPostShader(sprite, new SpriteComponent.PostShaderArgs(ContentPostShaderIds.TargetOutline, shader)
